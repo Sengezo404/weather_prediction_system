@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+.pytest_cache/
+models/*.joblib
+!models/multi_horizon/*.joblib
+data/processed/*.csv
+!data/processed/fused_weather.csv
+.streamlit/secrets.toml
+
+# Previous dashboard versions
+old_app.py
+app_oold.py
+app_fused.py
+app_fused_backup.py
+app_new_old.py
+app_present.py
+lat_app.py
+
+# Previous requirements file
+requirements_old.txt
+
+# Older Python scripts kept locally
+src/data_old.py
+src/old_data.py
+src/train_old.py

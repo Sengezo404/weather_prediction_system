@@ -1,0 +1,10 @@
+streamlit==1.63.0
+pandas==2.3.3
+numpy==2.5.3
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+meteostat==2.1.4
+requests==2.34.2
+altair==6.2.2
+plotly==6.9.0
