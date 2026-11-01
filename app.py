@@ -388,6 +388,7 @@ try:
     forecast_input = live_history
     data_mode = "live"
 except Exception as exc:
+    print(f"LIVE WEATHER ERROR: {type(exc).__name__}: {exc}", flush=True)
     live_history = history
     forecast_input = history
     try:
