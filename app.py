@@ -340,7 +340,35 @@ def build_outlook(frame: pd.DataFrame, forecast_day: pd.Timestamp, days: int = 1
 def cached_outlook(frame: pd.DataFrame, forecast_day: pd.Timestamp):
     return build_outlook(frame, forecast_day)
 
+# Download the fused model automatically on Streamlit Cloud
+import os
+import requests
 
+MODEL_URL = (
+    "https://github.com/Sengezo404/weather_prediction_system/"
+    "releases/download/v1.0-model/fused_models_compressed9.joblib"
+)
+
+if not FUSED_MODEL_PATH.exists():
+    FUSED_MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    temp_path = FUSED_MODEL_PATH.with_suffix(".download")
+
+    try:
+        with requests.get(MODEL_URL, stream=True, timeout=120) as response:
+            response.raise_for_status()
+
+            with open(temp_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        f.write(chunk)
+
+        os.replace(temp_path, FUSED_MODEL_PATH)
+
+    except Exception as e:
+        temp_path.unlink(missing_ok=True)
+        st.error(f"Could not download the fused prediction model: {e}")
+        st.stop()
 # ********************************************************************
 # Required model/data checks
 # ------------------------------------------------------------------
